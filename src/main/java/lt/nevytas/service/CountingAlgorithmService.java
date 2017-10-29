@@ -14,11 +14,13 @@ public class CountingAlgorithmService {
 
     @Autowired
     private WordCountingService wcService;
-    private String pathToInputFolder = "C:\\Users\\nevyt\\Documents\\word-couting-algorithm\\src\\main\\resources\\resource-texts";
+    private String workingDirPath = System.getProperty("user.dir");
+    private String pathToInputFolder = workingDirPath + "\\src\\main\\resources\\resource-texts";
 
     public Map<String, Integer> getWordCountMap() throws IOException {
         String contextString = wcService.getTextFileContentInFolder(pathToInputFolder);
         Map<String, Integer> wordMap = wcService.countRepeatedWordOccurrence(contextString);
+        System.out.println(workingDirPath);
         return wordMap;
     }
 }

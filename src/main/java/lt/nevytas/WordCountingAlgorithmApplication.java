@@ -22,7 +22,8 @@ public class WordCountingAlgorithmApplication implements CommandLineRunner {
     @Override
     public void run(String... strings) throws Exception {
 
-        String outputDirectory = "C:\\Users\\nevyt\\Documents\\word-couting-algorithm\\src\\main\\resources\\output\\";
+        String workingDirPath = System.getProperty("user.dir");
+        String outputDirectory = workingDirPath + "\\src\\main\\resources\\output\\";
 
         Map<String, Integer> wordMap = countingAlgorithmService.getWordCountMap();
 
