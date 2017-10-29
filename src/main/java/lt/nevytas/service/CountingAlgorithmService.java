@@ -18,7 +18,7 @@ public class CountingAlgorithmService {
 
     public Map<String, Integer> getWordCountMap() throws IOException {
         String contextString = wcService.getTextFileContentInFolder(pathToInputFolder);
-        Map<String, Integer> wordMap = wcService.countRepeatedWordOccurence(contextString);
-         return wordMap;
+        Map<String, Integer> wordMap = wcService.countRepeatedWordOccurrence(contextString);
+        return wordMap;
     }
 }

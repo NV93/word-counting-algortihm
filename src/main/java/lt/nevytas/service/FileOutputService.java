@@ -1,12 +1,6 @@
 package lt.nevytas.service;
 
-import com.sun.org.apache.xpath.internal.SourceTree;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
-import org.springframework.stereotype.Service;
-
 import java.io.IOException;
-import java.io.UncheckedIOException;
 import java.io.Writer;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -17,9 +11,7 @@ import java.util.Map;
  * Created by nevyt on 25-Oct-17.
  */
 
-public class FileOutputService implements  Runnable {
-    @Autowired
-    CountingAlgorithmService caService;
+public class FileOutputService implements Runnable {
 
     private Character startingChar;
     private Character endingChar;
@@ -39,18 +31,18 @@ public class FileOutputService implements  Runnable {
     public void run() {
         System.out.println(Thread.currentThread().getName() + " started ...");
         Path path = Paths.get(outputDirectory + outputFilename);
-            try (Writer writer = Files.newBufferedWriter(path)) {
-                wordMap.forEach((key, value) -> {
-                    if(key.charAt(0)>= startingChar && key.charAt(0)<= endingChar)
+        try (Writer writer = Files.newBufferedWriter(path)) {
+            wordMap.forEach((key, value) -> {
+                if (key.charAt(0) >= startingChar && key.charAt(0) <= endingChar)
                     try {
                         writer.write(key + " = " + value + System.lineSeparator());
-                    } catch (IOException ex) {
-                        throw new UncheckedIOException(ex);
+                    } catch (IOException e) {
+                        e.printStackTrace();
                     }
-                });
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+            });
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
     }
 }

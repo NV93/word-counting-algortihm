@@ -17,31 +17,36 @@ import java.util.concurrent.ConcurrentHashMap;
 
 @Service
 public class WordCountingService {
-    MyUtils utils = new MyUtils();
+
+    private MyUtils utils = new MyUtils();
     private String fileContent;
     private Charset encoding = StandardCharsets.UTF_8;
 
     public String getTextFileContentInFolder(String pathToInputFolder) throws IOException {
+
         File folder = new File(pathToInputFolder);
         File[] listOfFiles = folder.listFiles();
 
         for (File file :
                 listOfFiles) {
-            if(file.isFile() && file.getName().endsWith(".txt")){
+            if (file.isFile() && file.getName().endsWith(".txt")) {
                 fileContent = utils.readFile(file.getCanonicalPath(), encoding);
             }
         }
         return fileContent;
     }
 
-    public Map<String, Integer> countRepeatedWordOccurence(String input) {
-        ConcurrentHashMap<String,Integer> wordMap = new ConcurrentHashMap<>();
+    public Map<String, Integer> countRepeatedWordOccurrence(String input) {
+        ConcurrentHashMap<String, Integer> wordMap = new ConcurrentHashMap<>();
         String[] splitWordsArray = utils.splitString(input);
-        for (String s :splitWordsArray) {
+
+        for (String s : splitWordsArray) {
             wordMap.compute(s, (k, v) -> v == null ? 1 : v + 1);
         }
-        Map<String,Integer> sortedMap = new TreeMap<>(wordMap);
+
+        Map<String, Integer> sortedMap = new TreeMap<>(wordMap);
         System.out.println(sortedMap);
+
         return sortedMap;
     }
 }

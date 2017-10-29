@@ -11,15 +11,13 @@ import java.nio.file.Paths;
 public class MyUtils {
     String fileContent;
 
-    public String readFile(String path, Charset encoding)
-            throws IOException
-    {
+    public String readFile(String path, Charset encoding) throws IOException {
         byte[] encoded = Files.readAllBytes(Paths.get(path));
         fileContent = fileContent + new String(encoded, encoding).toLowerCase();
         return fileContent;
     }
 
-    public String[] splitString(String input){
+    public String[] splitString(String input) {
         String[] words = input.split("\\W+");
         return words;
     }
